@@ -10,7 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 @SpringBootTest
 @DirtiesContext
-@EmbeddedKafka(partitions = 1, brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"})
+@EmbeddedKafka(partitions = 1, brokerProperties = { "listeners=PLAINTEXT://localhost:9092", "port=9092" })
 class TaskTwoTests {
     static final Logger logger = LoggerFactory.getLogger(TaskTwoTests.class);
 
@@ -23,10 +23,10 @@ class TaskTwoTests {
     @Test
     void task_two_verifier() throws InterruptedException {
         String[] transactionLines = fileLoader.loadStrings("/test_data/poiuytrewq.uiop");
+        Thread.sleep(2000);
         for (String transactionLine : transactionLines) {
             kafkaProducer.send(transactionLine);
         }
-        Thread.sleep(2000);
         logger.info("----------------------------------------------------------");
         logger.info("----------------------------------------------------------");
         logger.info("----------------------------------------------------------");
